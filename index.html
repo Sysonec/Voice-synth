@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Voice Synthesis</title>
+</head>
+<body>
+  <h1>Voice Synthesis</h1>
+  <div class="container">
+    <textarea id="read" class="read" placeholder="Enter text to read.."></textarea>
+    <!-- Play button -->
+    <button id="play" class="play-btn">Read</button>
+
+    <!-- Stop button -->
+    <button id="stop" class="stop-btn">Stop</button>
+
+    <!-- Range of voices to select -->
+    <h3>Select voice</h3>
+    <select id="voices" class="voices"></select>
+
+    <!-- Voice Pitch -->
+    <h3>Pitch</h3>
+    <input type="range"
+    id="pitch"
+    class="pitch"
+    min="0"
+    max="15"
+    step="5"
+    value="0">
+    
+    <!-- Voice Rate -->
+    <h3>Rate</h3>
+    <input type="range"
+    id="rate"
+    class="rate"
+    min="0"
+    max="15"
+    step="5"
+    value="0">
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
