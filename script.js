@@ -1,63 +1,61 @@
-const readText = document.getElementById('read');
-const playBtn = document.getElementById('play');
-const stopBtn = document.getElementById('stop');
-const voiceSelect = document.getElementById('voices');
-const pitch = document.getElementById('pitch');
-const rate = document.getElementById('rate');
+const readText = document.getElementById("read");
+const playBtn = document.getElementById("play");
+const stopBtn = document.getElementById("stop");
+const voiceSelect = document.getElementById("voices");
+const pitch = document.getElementById("pitch");
+const rate = document.getElementById("rate");
 
 // Voices changed
-speechSynthesis.addEventListener('voiceschanged', getVoices)
-
+speechSynthesis.addEventListener("voiceschanged", getVoices);
 
 // Set voice
-voiceSelect.addEventListener('change', setVoice)
+voiceSelect.addEventListener("change", setVoice);
 
 // Stop voice
-stopBtn.addEventListener('click', stopReading);
+stopBtn.addEventListener("click", stopReading);
 
 // Init synth
 const synth = window.speechSynthesis;
 
-
 let speech = new SpeechSynthesisUtterance();
 
-
-// Set text 
+// Set text
 function setTextMessage() {
   speech.text = readText.value;
 }
 
-
-// Play voice 
-playBtn.addEventListener('click', playVoice)
+// Play voice
+playBtn.addEventListener("click", playVoice);
 
 function playVoice() {
   setTextMessage();
 
   // Increase pitch
-  if(pitch.value === '5') {
+  if (pitch.value === "5") {
     speech.pitch = 1.3;
-  } else if(pitch.value === '10') {
+  } else if (pitch.value === "10") {
     speech.pitch = 1.5;
-  } else if(pitch.value === '15') {
+  } else if (pitch.value === "15") {
     speech.pitch = 2;
-  } 
-  
+  } else {
+    speech.pitch = 1;
+  }
+
   // Increase rate
-  if(rate.value === '5') {
+  if (rate.value === "5") {
     speech.rate = 1.3;
-  } else if(rate.value === '10') {
+  } else if (rate.value === "10") {
     speech.rate = 1.5;
-  } else if(rate.value === '15') {
+  } else if (rate.value === "15") {
     speech.rate = 2;
-  } 
-  
+  } else {
+    speech.rate = 1;
+  }
+
   // Speak voice
   synth.speak(speech);
   resumeInfinity();
 }
-
-
 
 // Voice stops reading fix
 function resumeInfinity() {
@@ -65,30 +63,29 @@ function resumeInfinity() {
   timeoutResumeInfinity = setTimeout(resumeInfinity, 1000);
 }
 
-// Stop reading 
+// Stop reading
 function stopReading() {
   synth.cancel(speech);
 }
 
 // Set voice
 function setVoice(e) {
-  speech.voice = voices.find(voice => voice.name === e.target.value);
+  speech.voice = voices.find((voice) => voice.name === e.target.value);
 }
-
 
 // Store voices
 let voices = [];
 function getVoices() {
   voices = speechSynthesis.getVoices();
 
-  voices.forEach(voice => {
-    const option = document.createElement('option');
+  voices.forEach((voice) => {
+    const option = document.createElement("option");
 
     option.value = voice.name;
-    option.innerHTML = `${voice.name} ${voice.lang}`
+    option.innerHTML = `${voice.name} ${voice.lang}`;
 
     voiceSelect.appendChild(option);
-  })
+  });
 }
 
 // Init voices
